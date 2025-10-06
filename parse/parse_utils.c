@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ppx.h"
+#include "parse.h"
 
 static char	*find_valid_path(char **dirs, char *cmd)
 {
@@ -51,5 +51,10 @@ char	*build_path(char **env, char *cmd)
 	if (!dirs)
 		return (NULL);
 	path = find_valid_path(dirs, cmd);
+	if (!path)
+	{
+		free_enp(dirs);
+		return (NULL);
+	}
 	return (path);
 }

@@ -4,6 +4,7 @@ NAME   = pipex
 
 SRCS = ./parse/parse.c \
 	./ppx/ppx.c \
+	./parse/parse_utils.c \
 	main.c
 
 LIBS = ./libs/libft/libft.a

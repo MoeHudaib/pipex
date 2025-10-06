@@ -25,7 +25,10 @@ char	*try_path(char *cmd, char *path)
 		return (NULL);
 	new_path = ft_strjoin(path, new_cmd);
 	if (!new_path)
+	{
+		free(new_cmd);
 		return (NULL);
+	}
 	free(new_cmd);
 	return (new_path);
 }
