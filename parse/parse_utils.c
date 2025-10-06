@@ -43,6 +43,8 @@ char	*build_path(char **env, char *cmd)
 
 	if (!env || !cmd)
 		return (NULL);
+	if ((access(cmd, F_OK) == 0) && (access(cmd, X_OK) == 0))
+		return (cmd);
 	path_line = return_path(env);
 	if (!path_line)
 		return (NULL);
