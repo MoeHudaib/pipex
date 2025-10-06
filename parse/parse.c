@@ -6,7 +6,7 @@
 /*   By: mhdeeb <mhdeeb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 14:58:16 by mhdeeb            #+#    #+#             */
-/*   Updated: 2025/10/06 11:09:18 by mhdeeb           ###   ########.fr       */
+/*   Updated: 2025/10/06 11:11:36 by mhdeeb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ char	*try_path(char *cmd, char *path)
 	if (!path || !cmd)
 		return (NULL);
 	new_cmd = ft_strjoin("/", cmd);
+	if (!new_cmd)
+		return (NULL);
 	new_path = ft_strjoin(path, new_cmd);
+	if (!new_path)
+		return (NULL);
 	free(new_cmd);
 	return (new_path);
 }
