@@ -25,5 +25,6 @@
 # include "../libs/libft/libft.h"
 
 char	*build_path(char **env, char *cmd);
+char	*free_enp(char **enp);
 
 #endif

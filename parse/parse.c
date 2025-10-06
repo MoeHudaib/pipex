@@ -55,7 +55,7 @@ static char	*return_path(char **env)
 	return (NULL);
 }
 
-static char	*free_enp(char **enp)
+char	*free_enp(char **enp)
 {
 	int	i;
 

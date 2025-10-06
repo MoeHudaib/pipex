@@ -16,9 +16,15 @@
 # include "../parse/parse.h"
 # include <fcntl.h>
 
-int		open_outfile(char *path);
+typedef struct s_fd
+{
+    int fd_in;
+    int fd_out;
+}   t_fd;
+
+int		open_outfile(char *path, int fd_in);
 int		open_infile(char *path);
-void	second_child(int *pipefd, int fd_out, char **env, char *cmd);
-void	first_child(int *pipefd, int fd_in, char **env, char *cmd);
+void	second_child(int *pipefd, char **env, char *cmd, t_fd *fd);
+void	first_child(int *pipefd, char **env, char *cmd, t_fd *fd);
 
 #endif

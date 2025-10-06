@@ -12,30 +12,41 @@
 
 #include "./ppx/ppx.h"
 
-int	main(int ac, char **av, char **env)
+void	close_and_wait(int *pipefd, int fd_in, int fd_out, int *pid)
 {
-	int	pipefd[2];
-	int	fd_in;
-	int	fd_out;
-	int	pid[2];
-
-	if (ac != 5)
-		return (write(2, "Usage: ./pipex infile cmd1 cmd2 outfile\n", 40), 1);
-	fd_in = open_infile(av[1]);
-	fd_out = open_outfile(av[4]);
-	if (fd_in == -1 || fd_out == -1 || pipe(pipefd) == -1)
-		return (1);
-	pid[0] = fork();
-	if (pid[0] == 0)
-		first_child(pipefd, fd_in, env, av[2]);
-	pid[1] = fork();
-	if (pid[1] == 0)
-		second_child(pipefd, fd_out, env, av[3]);
 	close(pipefd[0]);
 	close(pipefd[1]);
 	close(fd_in);
 	close(fd_out);
 	waitpid(pid[0], NULL, 0);
 	waitpid(pid[1], NULL, 0);
+}
+
+int	main(int ac, char **av, char **env)
+{
+	int	pipefd[2];
+	t_fd	fd;
+	int	pid[2];
+
+	if (ac != 5)
+	{
+		write(2, "Usage: ./pipex file1 cmd1 cmd2 file2\n", 40);
+		return (1);
+	}
+	fd.fd_in = open_infile(av[1]);
+	fd.fd_out = open_outfile(av[4], fd.fd_in);
+	if (pipe(pipefd) == -1)
+	{
+		close(fd.fd_in);
+		close(fd.fd_out);
+		return (1);
+	}
+	pid[0] = fork();
+	if (pid[0] == 0)
+		first_child(pipefd, env, av[2], &fd);
+	pid[1] = fork();
+	if (pid[1] == 0)
+		second_child(pipefd, env, av[3], &fd);
+	close_and_wait(pipefd, fd.fd_in, fd.fd_out, pid);
 	return (0);
 }
