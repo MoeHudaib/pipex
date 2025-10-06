@@ -6,7 +6,7 @@
 /*   By: mhdeeb <mhdeeb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 18:21:51 by mhdeeb            #+#    #+#             */
-/*   Updated: 2025/10/05 18:23:29 by mhdeeb           ###   ########.fr       */
+/*   Updated: 2025/10/06 11:04:18 by mhdeeb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,9 @@ void	first_child(int *pipefd, char **env, char *cmd, t_fd *fd)
 		execve(path, args, env);
 	path = ft_strjoin(cmd, " : command not found\n");
 	if (path)
-	{
 		write(2, path, ft_strlen(path));
+	if (path)
 		free(path);
-	}
 	close(fd->fd_out);
 	free_enp(args);
 	exit(EXIT_FAILURE);
@@ -68,10 +67,9 @@ void	second_child(int *pipefd, char **env, char *cmd, t_fd *fd)
 		execve(path, args, env);
 	path = ft_strjoin(cmd, " : command not found\n");
 	if (path)
-	{
 		write(2, path, ft_strlen(path));
+	if (path)
 		free(path);
-	}
 	close(fd->fd_in);
 	free_enp(args);
 	exit(EXIT_FAILURE);

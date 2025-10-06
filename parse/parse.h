@@ -6,7 +6,7 @@
 /*   By: mhdeeb <mhdeeb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 16:04:30 by mhdeeb            #+#    #+#             */
-/*   Updated: 2025/10/05 16:05:19 by mhdeeb           ###   ########.fr       */
+/*   Updated: 2025/10/06 11:10:05 by mhdeeb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,8 @@
 
 char	*build_path(char **env, char *cmd);
 char	*free_enp(char **enp);
+char	*try_path(char *cmd, char *path);
+int		is_valid(char *path, int flag);
+char	*return_path(char **env);
 
 #endif

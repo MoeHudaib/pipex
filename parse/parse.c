@@ -6,14 +6,14 @@
 /*   By: mhdeeb <mhdeeb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 14:58:16 by mhdeeb            #+#    #+#             */
-/*   Updated: 2025/10/05 18:29:42 by mhdeeb           ###   ########.fr       */
+/*   Updated: 2025/10/06 11:09:18 by mhdeeb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include <stdio.h>
 
-static char	*try_path(char *cmd, char *path)
+char	*try_path(char *cmd, char *path)
 {
 	char	*new_path;
 	char	*new_cmd;
@@ -26,7 +26,7 @@ static char	*try_path(char *cmd, char *path)
 	return (new_path);
 }
 
-static int	is_valid(char *path, int flag)
+int	is_valid(char *path, int flag)
 {
 	int	res;
 
@@ -34,7 +34,7 @@ static int	is_valid(char *path, int flag)
 	return (res);
 }
 
-static char	*return_path(char **env)
+char	*return_path(char **env)
 {
 	char	*line;
 	int		i;
@@ -69,34 +69,6 @@ char	*free_enp(char **enp)
 	}
 	free(enp);
 	return (NULL);
-}
-
-char	*build_path(char **env, char *cmd)
-{
-	char	**enp;
-	char	*path;
-	char	*path_line;
-	int		i;
-
-	if (!env || !*env || !env)
-		return (NULL);
-	path_line = return_path(env);
-	if (!path_line)
-		return (NULL);
-	enp = ft_split(path_line, ':');
-	free(path_line);
-	i = 0;
-	while (enp[i])
-	{
-		path = try_path(cmd, enp[i++]);
-		if (path && is_valid(path, F_OK) == 0 && is_valid(path, X_OK) == 0)
-		{
-			free_enp(enp);
-			return (path);
-		}
-		free(path);
-	}
-	return (free_enp(enp));
 }
 /*
 int	main(int ac, char *av[], char *env[])

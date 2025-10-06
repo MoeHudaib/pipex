@@ -6,7 +6,7 @@
 /*   By: mhdeeb <mhdeeb@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/05 18:23:47 by mhdeeb            #+#    #+#             */
-/*   Updated: 2025/10/05 18:24:05 by mhdeeb           ###   ########.fr       */
+/*   Updated: 2025/10/06 11:05:25 by mhdeeb           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	close_and_wait(int *pipefd, int fd_in, int fd_out, int *pid)
 
 int	main(int ac, char **av, char **env)
 {
-	int	pipefd[2];
+	int		pipefd[2];
 	t_fd	fd;
-	int	pid[2];
+	int		pid[2];
 
 	if (ac != 5)
 	{
